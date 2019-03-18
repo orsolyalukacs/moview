@@ -1,4 +1,7 @@
+/* general.scss */
 //stylelint-disable
+html { font-family: 'Roboto', sans-serif; }
+
 body {
   margin: 0;
   padding: 0;
@@ -20,9 +23,7 @@ code {
 
   .app-header{
     background-color: #19181e;
-    height: 45px;
     color: #8b8bbf;
-
   }
 
   .app-title{
