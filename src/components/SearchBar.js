@@ -2,87 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import styles from '../utils/styles';
+import theme from '../utils/theme';
 import SearchIcon from '@material-ui/icons/Search';
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary: {
-      main: '#512da8',
-    },
-    secondary: {
-      main: '#dd33fa',
-    }
-  },
-});
-
-const styles = theme => ({
-  root: {
-    width: '100%',
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit,
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-    width: '100%',
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 120,
-      '&:focus': {
-        width: 200,
-      },
-    },
-  },
-});
-
 function SearchAppBar(props) {
-  const { classes } = props;
+  const { classes, searchHandler } = props;
   return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
@@ -93,6 +23,7 @@ function SearchAppBar(props) {
                   <SearchIcon />
                 </div>
                 <InputBase
+                    onChange={searchHandler}
                     placeholder="Search movies…"
                     classes={{
                       root: classes.inputRoot,
@@ -101,6 +32,9 @@ function SearchAppBar(props) {
                 />
               </div>
               <div className={classes.grow} />
+              <IconButton className={classes.menuButton} color="inherit" aria-label="tmdb-icon">
+                <img src="https://www.themoviedb.org/assets/2/v4/logos/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png" alt="tmdb-icon" height="50"/>
+              </IconButton>
               <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                 Moview
               </Typography>
