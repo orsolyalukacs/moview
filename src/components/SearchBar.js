@@ -12,7 +12,7 @@ import theme from '../utils/theme';
 import SearchIcon from '@material-ui/icons/Search';
 
 function SearchAppBar(props) {
-  const { classes, searchHandler } = props;
+  const { classes, searchHandler, onKeyDownHandler } = props;
   return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
@@ -24,6 +24,7 @@ function SearchAppBar(props) {
                 </div>
                 <InputBase
                     onChange={searchHandler}
+                    onKeyDown={onKeyDownHandler}
                     placeholder="Search movies…"
                     classes={{
                       root: classes.inputRoot,
