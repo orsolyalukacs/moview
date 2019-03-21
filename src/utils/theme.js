@@ -13,6 +13,7 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
+  spacing: [0, 2, 3, 5, 8],
 });
 
 export default theme;

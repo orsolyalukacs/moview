@@ -58,6 +58,41 @@ const styles = theme => ({
       },
     },
   },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  grid: {
+    root: {
+      flexGrow: 1,
+      padding: theme.spacing.unit * 4,
+    },
+  },
+  icon: {
+    margin: theme.spacing.unit * 2,
+  },
+  iconHover: {
+    margin: theme.spacing.unit * 2,
+    '&:hover': {
+      color: '#dd33fa',
+    },
+  },
+  list: {
+    width: '100%',
+    maxWidth: '75%',
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
+  block: {
+    display: 'block',
+  },
+  error: {
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+  }
 });
 
 export default styles;

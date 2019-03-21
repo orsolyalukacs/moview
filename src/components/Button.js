@@ -5,13 +5,14 @@ import theme from '../utils/theme';
 
 class ButtonPrimary extends Component {
   render() {
-    const { label, color, variant, onClickHandler } = this.props;
+    const { label, color, variant, onClickHandler, size } = this.props;
     return (
         <MuiThemeProvider theme={theme}>
          <Button
              color={color}
              variant={variant}
              onClick={onClickHandler}
+             size={size}
          >
            {label}
          </Button>
