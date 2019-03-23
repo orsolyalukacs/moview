@@ -1,6 +1,13 @@
 /* general.scss */
 //stylelint-disable
-html { font-family: 'Roboto', sans-serif; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+html {
+  font-family: 'Roboto', sans-serif;
+}
 
 body {
   margin: 0;
@@ -32,5 +39,12 @@ code {
 
   .movie-data-list {
     list-style: none;
+  }
+
+  .spinner{
+    background-image: url('../assets/Ripple-0.8s-200px.svg');
+    width: 250px;
+    height: 250px;
+    margin: 150px auto 0;
   }
 }
