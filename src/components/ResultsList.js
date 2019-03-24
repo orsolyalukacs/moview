@@ -24,7 +24,6 @@ class ResultsList extends Component {
     const { alignItems, direction, justify } = this.state;
 
     return (
-
         <Grid container spacing={24} className={classes.root}>
           <Grid item xs="auto">
             <Grid

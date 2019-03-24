@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import SearchAppBar from './components/SearchBar';
 import ResultsList from './components/ResultsList';
 import MovieList from './components/MovieList'
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 
 const searchExp = "?api_key=2ab787a73e407248e50ffd9242bd638f&query=";
 const baseUrl = "https://api.themoviedb.org/3/";
 
 class App extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
+
     this.state = {
       movies: [],
       requestFailed: false,
@@ -22,6 +25,10 @@ class App extends Component {
       dataFrom: '',
     };
     this.searchMovie('Shrek', searchExp, 'movie');
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
   }
 
   // Error handling if there is no result found.
@@ -66,7 +73,9 @@ class App extends Component {
   // Movie search function
   searchMovie = (searchTerm, searchExp, searchType) => {
     let url;
-    this.setState({ isLoading: true});
+    if (this._isMounted) {
+      this.setState({isLoading: true});
+    }
 
     if (searchType === 'related') {
       url =  baseUrl + "movie/" + searchTerm + "/similar?api_key=2ab787a73e407248e50ffd9242bd638f";
@@ -80,13 +89,13 @@ class App extends Component {
     axios.get(url)
         .then(res => {
           this.fetchData(res);
-          this.setState({
-                isLoading: false,
-              });
+            this.setState({
+              isLoading: false,
+            });
         })
         .catch((error) => {
           console.log(error);
-          this.setState({
+            this.setState({
             requestFailed: true,
             isLoading: false
           });
@@ -94,11 +103,15 @@ class App extends Component {
     };
 
   // Starts search when enter is pressed in the SearchBar.
-  keyPress(event) {
+  keyPress = (event) => {
     if(event.keyCode === 13) {
       const searchTerm = event.target.value;
       this.searchMovie(searchTerm, searchExp, 'movie');
     }
+  };
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
@@ -106,7 +119,7 @@ class App extends Component {
     return (
         <div className="app">
           <SearchAppBar
-              onKeyDownHandler={this.keyPress.bind(this)}
+              onKeyDownHandler={this.keyPress}
           />
           { isLoading?
                <div className="spinner"/>

@@ -33,6 +33,7 @@ const wikiExp = "&prop=extracts&exintro&explaintext&rvprop=content&origin=*&form
 class MovieList extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showWikiDetails: false,
       movieInfo: [],
