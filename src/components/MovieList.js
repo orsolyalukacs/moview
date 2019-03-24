@@ -18,10 +18,11 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   card: {
-    maxWidth: 345,
+    maxWidth: 200,
   },
   media: {
     height: 256,
+    maxWidth: 200
   },
 });
 
