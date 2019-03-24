@@ -4,8 +4,7 @@ __Moview is a movie searching app with React.__
 
 ## Features
 - Look up movies by their title. 
-- Movie data from the TMDb API. ![tmdb logo](/src/assets/tmdb-logo-rectangle-blue.png)
-- [TMDb](https://www.themoviedb.org/)
+- Movie data from the [TMDb](https://www.themoviedb.org/) API. ![tmdb logo](/src/assets/tmdb-logo-rectangle-blue.png)
 - Get more info from the movie's Wikipedia page.
 - Open movie's TMdb or Wikipedia website.
 
