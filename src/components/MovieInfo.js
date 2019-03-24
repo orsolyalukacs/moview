@@ -14,12 +14,13 @@ const styles = ({
 });
 
 class MovieInfo extends Component {
-  state = {
-    open: true,
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
+  openWikiPage = () => {
+    const {wikiPageId} = this.props;
+    const url = "https://en.wikipedia.org/?curid=" + wikiPageId;
+    window.open(
+        url,
+        '_blank'
+    );
   };
 
   openImdb = () => {
@@ -32,7 +33,7 @@ class MovieInfo extends Component {
   };
 
   render() {
-    const { movieInfo, movie, dataFrom, isLoading, classes } = this.props;
+    const { movieInfo, movie, dataFrom, isLoading, classes, open, handleClose } = this.props;
     const release_year = (movie.release_date).slice(0, 4);
 
     return (
@@ -41,8 +42,8 @@ class MovieInfo extends Component {
                 maxWidth="sm"
                 className="movie-info-modal"
                 aria-labelledby="responsive-dialog-title"
-                open={this.state.open}
-                onClose={this.handleClose}
+                open={open}
+                onClose={handleClose}
             >
               {isLoading ?
                 <div className="spinner"/>
@@ -62,13 +63,20 @@ class MovieInfo extends Component {
                       className={classes.dialog}>
                     <Button
                         variant="text"
+                        color="primary"
+                        label="Wikipedia"
+                        onClickHandler={this.openWikiPage}
+                        value="Wikipedia">
+                    </Button>
+                    <Button
+                        variant="text"
                         color="secondary"
                         label="Imdb"
                         onClickHandler={this.openImdb}
                         value="Imdb">
                     </Button>
                     <Button
-                        onClickHandler={this.handleClose}
+                        onClickHandler={handleClose}
                         color="primary"
                         label="Close">
                       Close

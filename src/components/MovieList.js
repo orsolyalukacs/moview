@@ -38,24 +38,15 @@ class MovieList extends Component {
       wikiPageId: '',
       isLoading: false,
       dataFrom: '',
+      open: false,
     }
 }
-
-  openWikiPage = () => {
-    const {wikiPageId} = this.state;
-    const url = "https://en.wikipedia.org/?curid=" + wikiPageId;
-    window.open(
-        url,
-        '_blank'
-    );
-  };
 
   // Query sent to the Wikipedia API
   wikiDetails = () => {
     const {movie} = this.props;
     const wikiSearchUrl = wikiQueryTitle + movie.title + wikiExp;
     this.setState({
-      showWikiDetails: true,
       isLoading: true,
     });
 
@@ -84,11 +75,11 @@ class MovieList extends Component {
 
     if (extract) {
       let pageId = obj[Object.keys(obj)[0]].pageid;
-      // this.setState({ wikiPageId: pageId });
       this.setState({
         movieInfo: extract,
         dataFrom:  'wikipedia',
-        wikiPageId: pageId
+        wikiPageId: pageId,
+        open: true,
       });
     } else {
       this.checkWikiExtract();
@@ -98,10 +89,21 @@ class MovieList extends Component {
 // Shows IMDB overview if Wiki extract is not available
   checkWikiExtract(){
     const { movie } = this.props;
-    this.setState({
-      movieInfo: movie.overview,
-      dataFrom: 'TMDb'
-    });
+
+    if (movie.overview) {
+      this.setState({
+        movieInfo: movie.overview,
+        dataFrom: 'TMDb',
+        open: true,
+      });
+    } else {
+      console.log('no info');
+      this.setState({
+        movieInfo: 'There is no information found.',
+        dataFrom: 'TMDb',
+        open: true,
+      });
+    }
   }
 
   // Sends related flag to fetch function in the App
@@ -110,8 +112,14 @@ class MovieList extends Component {
     updateHandler(movie.id, relatedTerm, 'related' );
   };
 
+
+  // Closes the modal
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
-    const { showWikiDetails, movieInfo, isLoading, dataFrom, wikiPageId } = this.state;
+    const { movieInfo, isLoading, dataFrom, wikiPageId, open } = this.state;
     const { classes, movie } = this.props;
     const release_year = (movie.release_date).slice(0, 4);
     const language = (ISO6391.getName(movie.original_language));
@@ -129,31 +137,21 @@ class MovieList extends Component {
                 onClickHandler={this.wikiDetails}
                 value="Wikipedia extract">
               </ButtonPrimary>
-              { showWikiDetails ?
                 <MovieInfo
                     movieInfo={movieInfo}
                     movie={movie}
                     dataFrom={dataFrom}
                     isLoading={isLoading}
                     wikiPageId={wikiPageId}
+                    handleClose={this.handleClose}
+                    open={open}
                 />
-                : null }
               <Typography component="ul" className="movie-data-list" color="textSecondary">
                 <li>original release: {release_year}</li>
                 <li>popularity: {movie.popularity}</li>
                 <li>original language: {language}</li>
               </Typography>
               <CardActions className="movie-info-buttons">
-                {showWikiDetails ?
-                    <ButtonPrimary
-                        variant="text"
-                        color="primary"
-                        label="Wikipedia"
-                        onClickHandler={this.openWikiPage}
-                        value="Wikipedia">
-                    </ButtonPrimary>
-                    : null
-                }
                 <ButtonPrimary
                     variant="text"
                     color="primary"
