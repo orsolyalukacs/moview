@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import 'whatwg-fetch';
+import axios from 'axios';
 import ISO6391 from 'iso-639-1';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -52,27 +53,24 @@ class MovieList extends Component {
       isLoading: true,
     });
 
-    fetch(wikiSearchUrl, {
-      method: 'GET',
-        })
-        .then(response => response.json())
-        .then(json => {
-          this.fetchWikiExtract(json);
-          this.setState({
-            isLoading: false,
-          });
-        })
-        .catch(err => {
-          console.log(err.message);
-          this.setState({
-            isLoading: false,
-          });
-        })
+    axios.get(wikiSearchUrl)
+      .then(res => {
+        this.fetchWikiExtract(res);
+        this.setState({
+          isLoading: false,
+        });
+      })
+      .catch(err => {
+        console.log(err.message);
+        this.setState({
+          isLoading: false,
+        });
+      })
   };
 
   // Gets movie extract from Wikipedia API if available
-  fetchWikiExtract(json) {
-    let obj = json.query.pages;
+  fetchWikiExtract(res) {
+    let obj = res.data.query.pages;
     let extract = obj[Object.keys(obj)[0]].extract;
 
     if (extract) {

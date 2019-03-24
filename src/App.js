@@ -90,26 +90,28 @@ class App extends Component {
     }
 
     axios.get(url)
-        .then(res => {
-          this.fetchData(res);
-            this.setState({
-              isLoading: false,
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-            this.setState({
-            requestFailed: true,
-            isLoading: false
+      .then(res => {
+        this.fetchData(res);
+          this.setState({
+            isLoading: false,
           });
-        })
+      })
+      .catch((error) => {
+        console.log(error);
+          this.setState({
+          requestFailed: true,
+          isLoading: false
+        });
+      })
     };
 
   // Starts search when enter is pressed in the SearchBar.
   keyPress = (event) => {
     if(event.keyCode === 13) {
       const searchTerm = event.target.value;
-      this.searchMovie(searchTerm, searchExp, 'movie');
+      if (searchTerm) {
+        this.searchMovie(searchTerm, searchExp, 'movie');
+      }
     }
   };
 
