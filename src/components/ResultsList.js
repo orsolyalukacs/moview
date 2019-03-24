@@ -1,19 +1,44 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  demo: {
+    height: 320,
+  },
+});
 
 class ResultsList extends Component {
+  state = {
+    direction: 'row',
+    justify: 'center',
+    alignItems: 'center',
+  };
+
   render(){
-    const { row } = this.props;
+    const { row, classes } = this.props;
+    const { alignItems, direction, justify } = this.state;
+
     return (
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                {row}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+
+        <Grid container spacing={24} className={classes.root}>
+          <Grid item xs="auto">
+            <Grid
+                container
+                spacing={16}
+                className={classes.demo}
+                alignItems={alignItems}
+                direction={direction}
+                justify={justify}
+            >
+              {row}
+            </Grid>
+          </Grid>
+        </Grid>
     );
   }
 }
@@ -22,5 +47,5 @@ ResultsList.propTypes = {
   row: PropTypes.array,
 };
 
-export default ResultsList;
+export default withStyles(styles)(ResultsList);
 
