@@ -71,9 +71,9 @@ class MovieInfo extends Component {
                     <Button
                         variant="text"
                         color="secondary"
-                        label="Imdb"
+                        label="TMDb"
                         onClickHandler={this.openImdb}
-                        value="Imdb">
+                        value="TMDb">
                     </Button>
                     <Button
                         onClickHandler={handleClose}

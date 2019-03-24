@@ -97,7 +97,6 @@ class MovieList extends Component {
         open: true,
       });
     } else {
-      console.log('no info');
       this.setState({
         movieInfo: 'There is no information found.',
         dataFrom: 'TMDb',
@@ -126,7 +125,7 @@ class MovieList extends Component {
 
     return (
         <Card className={classes.card} id="card" spacing={24}>
-          <CardMedia className={classes.media} title="poster" image={movie.poster_path}/>
+          <CardMedia className={classes.media} title="poster" image={movie.poster_path} alt="poster-image"/>
           <CardContent>
             <Fragment>
               <ButtonPrimary

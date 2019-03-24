@@ -41,7 +41,11 @@ class App extends Component {
   renderResults(results) {
     let movieList = [];
     results.forEach((movie) => {
-      movie.poster_path="https://image.tmdb.org/t/p/w185" + movie.poster_path;
+      if (movie.poster_path) {
+        movie.poster_path="https://image.tmdb.org/t/p/w185" + movie.poster_path;
+      } else {
+        movie.poster_path="https://www.freeiconspng.com/uploads/no-image-icon-23.jpg";
+      }
       const movieItem = <MovieList key={movie.id} movie={movie} updateHandler={this.searchMovie.bind(this)} />
       movieList.push(movieItem);
     });
