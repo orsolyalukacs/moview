@@ -16,13 +16,12 @@ class App extends Component {
       movies: [],
       requestFailed: false,
       isLoading: false,
+      showWikiDetails: false,
+      movieInfo: [],
+      wikiPageId: '',
+      dataFrom: '',
     };
-    this.searchMovie('Vuk', searchExp, 'movie');
-  }
-
-  componentDidMount() {
-    this.searchMovie.bind(this);
-    this.fetchData.bind(this);
+    this.searchMovie('Shrek', searchExp, 'movie');
   }
 
   // Error handling if there is no result found.
@@ -61,7 +60,7 @@ class App extends Component {
   }
 
   // Movie search function
-  searchMovie(searchTerm, searchExp, searchType){
+  searchMovie = (searchTerm, searchExp, searchType) => {
     let url;
     this.setState({ isLoading: true});
 
@@ -88,7 +87,7 @@ class App extends Component {
             isLoading: false
           });
         })
-    }
+    };
 
   // Starts search when enter is pressed in the SearchBar.
   keyPress(event) {
