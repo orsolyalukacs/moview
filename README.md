@@ -5,15 +5,16 @@ __Moview is a movie searching app with React.__
 ## Features
 - Look up movies by their title. 
 - Movie data from the TMDb API. ![tmdb logo](/src/assets/tmdb-logo-rectangle-blue.png)
+- [TMDb](https://www.themoviedb.org/)
 - Get more info from the movie's Wikipedia page.
 - Open movie's TMdb or Wikipedia website.
 
 ## Extra feature
 - Get inspired by searching for related movies.
 
-## Installation
+## Setup
 
-In the project directory, you can run:
+To run this project, install it locally from the project directory, using npm:
 
 ### `npm install`
 
@@ -23,9 +24,6 @@ When installing packages has finished, you can run:
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
 ### `npm run build`
 
