@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from './Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -33,7 +33,7 @@ class MovieInfo extends Component {
   };
 
   render() {
-    const { movieInfo, movie, dataFrom, isLoading, classes, open, handleClose } = this.props;
+    const { movieInfo, movie, dataFrom, classes, open, handleClose } = this.props;
     const release_year = (movie.release_date).slice(0, 4);
 
     return (
@@ -45,45 +45,39 @@ class MovieInfo extends Component {
                 open={open}
                 onClose={handleClose}
             >
-              {isLoading ?
-                <div className="spinner"/>
-                :
-                <Fragment>
-                  <DialogTitle id="responsive-dialog-title">
-                    {movie.title} ({release_year} film)
-                  </DialogTitle>
-                  <DialogContent>
-                      <DialogContentText>
-                        {movieInfo}
-                        <br/>
-                        <sub>/from {dataFrom}/</sub>
-                      </DialogContentText>
-                  </DialogContent>
-                  <DialogActions
-                      className={classes.dialog}>
-                    <Button
-                        variant="text"
-                        color="primary"
-                        label="Wikipedia"
-                        onClickHandler={this.openWikiPage}
-                        value="Wikipedia">
-                    </Button>
-                    <Button
-                        variant="text"
-                        color="secondary"
-                        label="TMDb"
-                        onClickHandler={this.openImdb}
-                        value="TMDb">
-                    </Button>
-                    <Button
-                        onClickHandler={handleClose}
-                        color="primary"
-                        label="Close">
-                      Close
-                    </Button>
-                  </DialogActions>
-                </Fragment>
-                }
+              <DialogTitle id="responsive-dialog-title">
+                {movie.title} ({release_year} film)
+              </DialogTitle>
+              <DialogContent>
+                  <DialogContentText>
+                    {movieInfo}
+                    <br/>
+                    <sub>/from {dataFrom}/</sub>
+                  </DialogContentText>
+              </DialogContent>
+              <DialogActions
+                  className={classes.dialog}>
+                <Button
+                    variant="text"
+                    color="primary"
+                    label="Wikipedia"
+                    onClickHandler={this.openWikiPage}
+                    value="Wikipedia">
+                </Button>
+                <Button
+                    variant="text"
+                    color="secondary"
+                    label="TMDb"
+                    onClickHandler={this.openImdb}
+                    value="TMDb">
+                </Button>
+                <Button
+                    onClickHandler={handleClose}
+                    color="primary"
+                    label="Close">
+                  Close
+                </Button>
+              </DialogActions>
             </Dialog>
         </div>
     );
