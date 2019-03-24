@@ -4,9 +4,10 @@ __Moview is a movie searching app with React.__
 
 ## Features
 - Look up movies by their title. 
+- Get more info from the movie's Wikipedia page by clicking on the movie's title.
+- If there is no Wikipedia info found, it shows Tmdb overview in a modal window.
+- Shows links to the movie's Tmdb and Wikipedia website.
 - Movie data from the [TMDb](https://www.themoviedb.org/) API. ![tmdb logo](/src/assets/tmdb-logo-rectangle-blue.png)
-- Get more info from the movie's Wikipedia page.
-- Open movie's TMdb or Wikipedia website.
 
 ## Extra feature
 - Get inspired by searching for related movies.
@@ -33,4 +34,5 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 ### Improvements to be made:
-Write tests with Jest and enzyme.
+- _'Go back'_ button after clicking _'Related'_.
+- Write tests with Jest and enzyme.
