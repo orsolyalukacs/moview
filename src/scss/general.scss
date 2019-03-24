@@ -17,6 +17,7 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #333;
 }
 
 code {
@@ -37,14 +38,46 @@ code {
     font-weight: 600;
   }
 
-  .movie-data-list {
-    list-style: none;
+  .spinner{
+    background-image: url('../assets/Ellipsis-2.2s-90px.svg');
+    width: 90px;
+    height: 45px;
+    margin: 0 auto;
+    position: relative;
+    display: inline-block;
   }
 
-  .spinner{
-    background-image: url('../assets/Ripple-0.8s-200px.svg');
-    width: 250px;
-    height: 250px;
-    margin: 150px auto 0;
+  .table-wrapper {
+    width: 100%;
+  }
+
+  .poster-image {
+    max-height:100%;
+    height: auto;
+  }
+
+  .movie-info-text {
+    padding: 20px 0;
+    text-align: justify;
+  }
+
+  .movie-info-buttons {
+    margin-left: -14px;
+  }
+
+  .movie-data-list {
+    list-style: none;
+    padding-left: 0;
+    padding-top: 20px;
+  }
+
+  #card {
+    padding: 5px;
+    margin: 34px 16px 10px;
+  }
+
+  #movie-info-wrapper {
+    max-width: 70vw;
+    height: auto;
   }
 }
