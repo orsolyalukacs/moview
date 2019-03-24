@@ -40,7 +40,7 @@ Your app is ready to be deployed!
 - MovieCard: Shows movie poster image, title, release year, original language and rating.
              Shows a placeholder image if no poster image found.
              All data fetched from TMdb API in the component.
-             If no string is in the Search ```input``, prevents from re-rendering.
+             If no string is in the Search ```input```, prevents from re-rendering.
 - MovieGrid: Wraps MovieCard into a Material UI Grid layout.
 - MovieInfo: Opens modal window with movie information after clicking the movie title. 
              Has 3 buttons: Wikipedia,TMDb, and Close button. 
