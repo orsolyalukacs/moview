@@ -36,6 +36,7 @@ class MovieList extends Component {
       movieInfo: [],
       WikiPageID: '',
       isLoading: false,
+      dataFrom: '',
     }
 }
   openImdb() {
@@ -83,15 +84,16 @@ class MovieList extends Component {
         })
   }
 
-  // Gets movie extract from Wikipedia API
+  // Gets movie extract from Wikipedia API if available
   fetchWikiExtract(json) {
     let obj = json.query.pages;
     let extract = obj[Object.keys(obj)[0]].extract;
 
     if (extract) {
-      // let trimExtract = (extract.substr(0,180) + '...');
-      // console.log(trimExtract);
-      this.setState({ movieInfo: extract });
+      this.setState({
+        movieInfo: extract,
+        dataFrom:  'wikipedia'
+      });
     } else {
       this.checkWikiExtract();
     }
@@ -103,7 +105,10 @@ class MovieList extends Component {
 // Shows IMDB overview if Wiki extract is not available
   checkWikiExtract(){
     const { movie } = this.props;
-    this.setState({ movieInfo: movie.overview});
+    this.setState({
+      movieInfo: movie.overview,
+      dataFrom: 'TMDb'
+    });
   }
 
   // Sends related flag to fetch function in the App
@@ -113,7 +118,7 @@ class MovieList extends Component {
   }
 
   render() {
-    const { showWikiDetails, movieInfo, isLoading } = this.state;
+    const { showWikiDetails, movieInfo, isLoading, dataFrom } = this.state;
     const { classes, movie } = this.props;
     return (
         <Fragment>
@@ -134,7 +139,10 @@ class MovieList extends Component {
                     { isLoading ?
                         <div className="spinner"/>
                       :
-                      <MovieInfo movieInfo={movieInfo} movie={movie}/>
+                      <MovieInfo
+                          movieInfo={movieInfo}
+                          movie={movie}
+                          dataFrom={dataFrom}/>
                     }
                    <CardActions className="movie-info-buttons">
                       <ButtonPrimary

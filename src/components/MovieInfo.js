@@ -17,7 +17,9 @@ class MovieInfo extends Component {
   };
 
   render() {
-    const { movieInfo, movie } = this.props;
+    const { movieInfo, movie, dataFrom } = this.props;
+    const release_year = (movie.release_date).slice(0, 4);
+
     return (
         <div id="movie-info-wrapper">
           <Dialog
@@ -28,13 +30,13 @@ class MovieInfo extends Component {
               onClose={this.handleClose}
           >
             <DialogTitle id="responsive-dialog-title">
-              {movie.title}
+              {movie.title} ({release_year} film)
             </DialogTitle>
               <DialogContent>
                 <DialogContentText>
                   {movieInfo}
                    <br/>
-                   <sub>/from wikipedia/</sub>
+                   <sub>/from {dataFrom}/</sub>
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
