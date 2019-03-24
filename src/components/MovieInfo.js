@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Button from './Button';
+import Button from './ButtonPrimary';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -23,7 +23,7 @@ class MovieInfo extends Component {
     );
   };
 
-  openImdb = () => {
+  openImdbPage = () => {
     const {movie} = this.props;
     const url = "https://www.themoviedb.org/movie/" + movie.id;
     window.open(
@@ -68,7 +68,7 @@ class MovieInfo extends Component {
                     variant="text"
                     color="secondary"
                     label="TMDb"
-                    onClickHandler={this.openImdb}
+                    onClickHandler={this.openImdbPage}
                     value="TMDb">
                 </Button>
                 <Button

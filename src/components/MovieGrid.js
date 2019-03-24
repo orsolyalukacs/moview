@@ -12,7 +12,7 @@ const styles = theme => ({
   },
 });
 
-class ResultsList extends Component {
+class MovieGrid extends Component {
   state = {
     direction: 'row',
     justify: 'center',
@@ -42,9 +42,9 @@ class ResultsList extends Component {
   }
 }
 
-ResultsList.propTypes = {
+MovieGrid.propTypes = {
   row: PropTypes.array,
 };
 
-export default withStyles(styles)(ResultsList);
+export default withStyles(styles)(MovieGrid);
 

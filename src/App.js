@@ -3,8 +3,8 @@ import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import SearchAppBar from './components/SearchBar';
-import ResultsList from './components/ResultsList';
-import MovieList from './components/MovieList'
+import MovieGrid from './components/MovieGrid';
+import MovieCard from './components/MovieCard'
 
 const searchExp = "?api_key=2ab787a73e407248e50ffd9242bd638f&query=";
 const baseUrl = "https://api.themoviedb.org/3/";
@@ -31,8 +31,7 @@ class App extends Component {
     this._isMounted = true;
   }
 
-  // Error handling if there is no result found.
-  errorMessage(results) {
+  errorHandling(results) {
     if (results.length < 1 ) {
       this.setState({
         requestFailed: true
@@ -44,22 +43,24 @@ class App extends Component {
     }
   }
 
-  // Renders a list of movies
   renderResults(results) {
+    const posterBaseUrl = "https://image.tmdb.org/t/p/w185";
+    const placeholderImg = "https://www.freeiconspng.com/uploads/no-image-icon-23.jpg";
     let movieList = [];
+
     results.forEach((movie) => {
       if (movie.poster_path) {
-        movie.poster_path="https://image.tmdb.org/t/p/w185" + movie.poster_path;
+        movie.poster_path=posterBaseUrl + movie.poster_path;
       } else {
-        movie.poster_path="https://www.freeiconspng.com/uploads/no-image-icon-23.jpg";
+        movie.poster_path=placeholderImg;
       }
-      const movieItem = <MovieList key={movie.id} movie={movie} updateHandler={this.searchMovie.bind(this)} />
+      const movieItem = <MovieCard key={movie.id} movie={movie} updateHandler={this.searchMovie.bind(this)} />
       movieList.push(movieItem);
     });
+
     this.setState({row: movieList});
   }
 
-   // Fetches data from the Api
   fetchData(res) {
     const movies = res.data;
     this.setState({ movies: res.data });
@@ -67,10 +68,9 @@ class App extends Component {
     const results = movies.results;
 
     this.renderResults(results);
-    this.errorMessage(results);
+    this.errorHandling(results);
   }
 
-  // Movie search function
   searchMovie = (searchTerm, searchExp, searchType) => {
     let url;
     if (this._isMounted) {
@@ -105,7 +105,6 @@ class App extends Component {
       })
     };
 
-  // Starts search when enter is pressed in the SearchBar.
   keyPress = (event) => {
     if(event.keyCode === 13) {
       const searchTerm = event.target.value;
@@ -141,7 +140,7 @@ class App extends Component {
                 </Typography>
               </Paper>
               :
-              <ResultsList row={row} />
+              <MovieGrid row={row} />
           }
         </div>
     );

@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-import 'whatwg-fetch';
 import axios from 'axios';
 import ISO6391 from 'iso-639-1';
 import PropTypes from 'prop-types';
@@ -9,7 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import ButtonPrimary from './Button';
+import ButtonPrimary from './ButtonPrimary';
 import MovieInfo from './MovieInfo';
 
 const styles = theme => ({
@@ -31,7 +30,7 @@ const wikiQueryTitle = "https://en.wikipedia.org/w/api.php?action=query&titles="
 const relatedTerm = "/similar?api_key=2ab787a73e407248e50ffd9242bd638f";
 const wikiExp = "&prop=extracts&exintro&explaintext&rvprop=content&origin=*&format=json";
 
-class MovieList extends Component {
+class MovieCard extends Component {
   constructor(props) {
     super(props);
 
@@ -167,8 +166,8 @@ class MovieList extends Component {
   }
 }
 
-MovieList.propTypes = {
+MovieCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MovieList);
+export default withStyles(styles)(MovieCard);
