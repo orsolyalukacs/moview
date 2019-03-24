@@ -23,8 +23,8 @@ class App extends Component {
       movieInfo: [],
       wikiPageId: '',
       dataFrom: '',
-    };
-    this.searchMovie('Shrek', searchExp, 'movie');
+      initialState: true,
+  };
   }
 
   componentDidMount() {
@@ -74,7 +74,10 @@ class App extends Component {
   searchMovie = (searchTerm, searchExp, searchType) => {
     let url;
     if (this._isMounted) {
-      this.setState({isLoading: true});
+      this.setState({
+        initialState: false,
+        isLoading: true
+      });
     }
 
     if (searchType === 'related') {
@@ -115,12 +118,17 @@ class App extends Component {
   }
 
   render() {
-    const { row, requestFailed, isLoading } = this.state;
+    const { row, requestFailed, isLoading, initialState } = this.state;
     return (
         <div className="app">
           <SearchAppBar
               onKeyDownHandler={this.keyPress}
           />
+          { initialState?
+            <div className="moview-logo">
+            </div>
+            : null
+          }
           { isLoading?
                <div className="spinner"/>
               :
