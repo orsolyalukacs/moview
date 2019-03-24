@@ -51,3 +51,4 @@ Your app is ready to be deployed!
 ### Improvements to be made:
 - Use Router and history to be able to go back after clicking _'Related'_.
 - Write tests with Jest and enzyme.
+- Filter Wikipedia Api calls by only showing the movie searched for, and not redirect pages.
