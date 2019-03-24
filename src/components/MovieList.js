@@ -1,12 +1,14 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ButtonPrimary from './Button';
 import 'whatwg-fetch';
+import MovieInfo from './MovieInfo';
 
 const styles = theme => ({
   root: {
@@ -14,8 +16,11 @@ const styles = theme => ({
     maxWidth: '800',
     backgroundColor: theme.palette.background.paper,
   },
-  inline: {
-    display: 'inline',
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 256,
   },
 });
 
@@ -28,12 +33,12 @@ class MovieList extends Component {
     super(props);
     this.state = {
       showWikiDetails: false,
-      movieOverview: [],
+      movieInfo: [],
       WikiPageID: '',
       isLoading: false,
     }
 }
-  viewDetails() {
+  openImdb() {
     const {movie} = this.props;
     const url = "https://www.themoviedb.org/movie/" + movie.id;
     window.open(
@@ -52,7 +57,7 @@ class MovieList extends Component {
   }
 
   // Query sent to the Wikipedia API
-  wikiHandler() {
+  wikiDetails() {
     const {movie} = this.props;
     const wikiSearchUrl = wikiQueryTitle + movie.title + wikiExp;
     this.setState({
@@ -79,84 +84,95 @@ class MovieList extends Component {
   }
 
   // Gets movie extract from Wikipedia API
-  fetchWikiExtract(json){
-    console.log(json);
+  fetchWikiExtract(json) {
     let obj = json.query.pages;
-    this.setState({ wikiPageId: obj[Object.keys(obj)[0]].pageid });
-    this.setState({ movieOverview: obj[Object.keys(obj)[0]].extract });
-    console.log(this.state.movieOverview);
+    let extract = obj[Object.keys(obj)[0]].extract;
+
+    if (extract) {
+      // let trimExtract = (extract.substr(0,180) + '...');
+      // console.log(trimExtract);
+      this.setState({ movieInfo: extract });
+    } else {
+      this.checkWikiExtract();
+    }
+
+    let pageId = obj[Object.keys(obj)[0]].pageid;
+    this.setState({ wikiPageId: pageId });
   }
 
-  // Sends related flag to fetch function
+// Shows IMDB overview if Wiki extract is not available
+  checkWikiExtract(){
+    const { movie } = this.props;
+    this.setState({ movieInfo: movie.overview});
+  }
+
+  // Sends related flag to fetch function in the App
   relatedHandler() {
     const {updateHandler, movie} = this.props;
     updateHandler(movie.id, relatedTerm, 'related' );
   }
 
   render() {
-    const { showWikiDetails, movieOverview, isLoading } = this.state;
+    const { showWikiDetails, movieInfo, isLoading } = this.state;
     const { classes, movie } = this.props;
     return (
-        <List className={classes.root}>
-          <ListItem alignItems="flex-start">
-            <img alt="poster" src={movie.poster_path}/>
-            <ListItemText
-                primary={
+        <Fragment>
+        <Card className={classes.card} id="card" spacing={24}>
+          <CardMedia className={classes.media} title="poster" image={movie.poster_path}/>
+          <CardContent>
+            <Fragment>
+              <ButtonPrimary
+                variant="contained"
+                color="secondary"
+                className="button-title"
+                label={movie.title}
+                onClickHandler={this.wikiDetails.bind(this)}
+                value="Wikipedia extract">
+              </ButtonPrimary>
+              { showWikiDetails ?
                   <Fragment>
-                    <ButtonPrimary
-                        variant="outlined"
+                    { isLoading ?
+                        <div className="spinner"/>
+                      :
+                      <MovieInfo movieInfo={movieInfo} movie={movie}/>
+                    }
+                   <CardActions className="movie-info-buttons">
+                      <ButtonPrimary
+                        variant="text"
+                        color="primary"
+                        className="title-button"
+                        label="Imdb"
+                        onClickHandler={this.openImdb.bind(this)}
+                        value="Imdb">
+                       </ButtonPrimary>
+                      <ButtonPrimary
+                        variant="text"
+                        color="secondary"
+                        className={classes.block}
+                        label="Wikipedia"
+                        onClickHandler={this.openWikiPage.bind(this)}
+                        value="Wikipedia">
+                      </ButtonPrimary>
+                      <ButtonPrimary
+                        variant="text"
                         color="primary"
                         className={classes.block}
-                        label={movie.title}
-                        onClickHandler={this.wikiHandler.bind(this)}
-                        value="Wikipedia extract">
-                    </ButtonPrimary>
-                    { showWikiDetails ?
-                        <Fragment>
-                          {isLoading ?
-                              <div className="spinner"/>
-                              :
-                              <Typography component="p"
-                                          color="textPrimary">
-                                {movieOverview}
-                              </Typography>
-                          }
-                          <ButtonPrimary
-                              variant="text"
-                              color="secondary"
-                              className={classes.block}
-                              label="Imdb"
-                              onClickHandler={this.viewDetails.bind(this)}
-                              value="Imdb">
-                            </ButtonPrimary>
-                          <ButtonPrimary
-                              variant="text"
-                              color="primary"
-                              className={classes.block}
-                              label="Wikipedia"
-                              onClickHandler={this.openWikiPage.bind(this)}
-                              value="Wikipedia">
-                          </ButtonPrimary>
-                          <ButtonPrimary
-                              variant="text"
-                              color="primary"
-                              className={classes.block}
-                              label="Related"
-                              onClickHandler={this.relatedHandler.bind(this)}
-                              value="Related">
-                          </ButtonPrimary>
-                        </Fragment>
-                     : null }
-                    <Typography component="ul" className="movie-data-list" color="textSecondary">
-                      <li>original release: {movie.release_date}</li>
-                      <li>popularity: {movie.popularity}</li>
-                      <li>original language: {movie.original_language}</li>
-                    </Typography>
+                        label="Related"
+                        onClickHandler={this.relatedHandler.bind(this)}
+                        value="Related">
+                      </ButtonPrimary>
+                   </CardActions>
                   </Fragment>
-                }
-            />
-          </ListItem>
-        </List>
+               : null }
+              <Typography component="ul" className="movie-data-list" color="textSecondary">
+                <li>original release: {movie.release_date}</li>
+                <li>popularity: {movie.popularity}</li>
+                <li>original language: {movie.original_language}</li>
+              </Typography>
+            </Fragment>
+          </CardContent>
+        </Card>
+        </Fragment>
     );
   }
 }
