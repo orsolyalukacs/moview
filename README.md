@@ -12,6 +12,8 @@ __Moview is a movie searching app with React.__
 ## Extra feature
 - Get inspired by searching for related movies.
 
+![](/src/assets/moview_screen.gif)
+
 ## Setup
 
 To run this project, install it locally from the project directory, using npm:
@@ -34,5 +36,5 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 ### Improvements to be made:
-- _'Go back'_ button after clicking _'Related'_.
+- Use Router and history to be able to go back after clicking _'Related'_.
 - Write tests with Jest and enzyme.
