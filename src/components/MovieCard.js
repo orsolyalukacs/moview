@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
 import axios from 'axios';
-import config from '../config';
 import ISO6391 from 'iso-639-1';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,6 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import config from '../config';
 import ButtonPrimary from './ButtonPrimary';
 import MovieInfo from './MovieInfo';
 
@@ -29,7 +29,7 @@ const styles = theme => ({
 
 const tmdbKey = config.TMDB_KEY;
 const wikiQueryTitle = 'https://en.wikipedia.org/w/api.php?action=query&titles=';
-const relatedTerm = '/similar?api_key=' + tmdbKey;
+const relatedTerm = `/similar?api_key=${tmdbKey}`;
 const wikiExp = '&prop=extracts&exintro&explaintext&rvprop=content&origin=*&format=json';
 
 class MovieCard extends Component {
