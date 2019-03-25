@@ -10,8 +10,6 @@ const searchExp = "?api_key=2ab787a73e407248e50ffd9242bd638f&query=";
 const baseUrl = "https://api.themoviedb.org/3/";
 
 class App extends Component {
-  _isMounted = false;
-
   constructor(props) {
     super(props);
 
@@ -24,11 +22,8 @@ class App extends Component {
       wikiPageId: '',
       dataFrom: '',
       initialState: true,
-  };
-  }
-
-  componentDidMount() {
-    this._isMounted = true;
+   };
+   this.keyPress = this.keyPress.bind(this);
   }
 
   errorHandling(results) {
@@ -105,7 +100,7 @@ class App extends Component {
       })
     };
 
-  keyPress = (event) => {
+  keyPress(event) {
     if(event.keyCode === 13) {
       const searchTerm = event.target.value;
       if (searchTerm) {
@@ -113,10 +108,6 @@ class App extends Component {
       }
     }
   };
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
 
   render() {
     const { row, requestFailed, isLoading, initialState } = this.state;
