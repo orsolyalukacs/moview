@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "axios": "^0.18.0",
     "fetch": "^1.1.0",
     "iso-639-1": "^2.0.3",
     "normalize.css": "^8.0.1",
@@ -35,7 +36,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "axios": "^0.18.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
