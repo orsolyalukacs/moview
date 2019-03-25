@@ -28,7 +28,7 @@ class MovieInfo extends Component {
   };
 
   render() {
-    const { movieInfo, movie, dataFrom, classes, open, handleClose } = this.props;
+    const { movieInfo, movie, dataFrom, classes, open, handleClose, showWikiLink } = this.props;
     const releaseYear = movie.release_date.slice(0, 4);
 
     return (
@@ -51,7 +51,9 @@ class MovieInfo extends Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions className={classes.dialog}>
+            { showWikiLink ?
             <ButtonPrimary label="Wikipedia" onClickHandler={this.openWikiPage} value="Wikipedia" />
+              : null }
             <ButtonPrimary
               color="secondary"
               label="TMDb"

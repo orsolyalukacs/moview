@@ -42,6 +42,7 @@ class MovieCard extends Component {
       wikiPageId: '',
       dataFrom: '',
       open: false,
+      showWikiLink: false,
     };
   }
 
@@ -83,6 +84,7 @@ class MovieCard extends Component {
         movieInfo: extract,
         dataFrom: 'wikipedia',
         wikiPageId: pageId,
+        showWikiLink: true,
         open: true,
       });
     } else {
@@ -99,6 +101,7 @@ class MovieCard extends Component {
         movieInfo: movie.overview,
         dataFrom: 'TMDb',
         open: true,
+        showWikiLink: false,
       });
     } else {
       this.setState({
@@ -110,7 +113,7 @@ class MovieCard extends Component {
   }
 
   render() {
-    const { movieInfo, dataFrom, wikiPageId, open } = this.state;
+    const { movieInfo, dataFrom, wikiPageId, open, showWikiLink } = this.state;
     const { classes, movie } = this.props;
     const releaseYear = movie.release_date.slice(0, 4);
     const language = ISO6391.getName(movie.original_language);
@@ -139,6 +142,7 @@ class MovieCard extends Component {
               movie={movie}
               dataFrom={dataFrom}
               wikiPageId={wikiPageId}
+              showWikiLink={showWikiLink}
               handleClose={this.handleClose}
               open={open}
             />
