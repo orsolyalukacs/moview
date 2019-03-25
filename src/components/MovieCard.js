@@ -28,9 +28,10 @@ const styles = theme => ({
 });
 
 const tmdbKey = config.TMDB_KEY;
-const wikiQueryTitle = 'https://en.wikipedia.org/w/api.php?action=query&titles=';
+const wikiListExp = '&origin=*&utf8=&explaintext&format=json';
 const relatedTerm = `/similar?api_key=${tmdbKey}`;
-const wikiExp = '&prop=extracts&exintro&explaintext&rvprop=content&origin=*&format=json';
+const wikiSearch =
+  'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=xml&exintro=&titles=';
 
 class MovieCard extends Component {
   constructor(props) {
@@ -47,7 +48,8 @@ class MovieCard extends Component {
   // Query sent to the Wikipedia API
   wikiDetails = () => {
     const { movie } = this.props;
-    const wikiSearchUrl = wikiQueryTitle + movie.title + wikiExp;
+    const releaseYear = movie.release_date.slice(0, 4);
+    const wikiSearchUrl = `${wikiSearch + movie.title} (${releaseYear} film)${wikiListExp}`;
 
     axios
       .get(wikiSearchUrl)
