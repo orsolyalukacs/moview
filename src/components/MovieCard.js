@@ -38,7 +38,6 @@ class MovieCard extends Component {
       showWikiDetails: false,
       movieInfo: [],
       wikiPageId: '',
-      isLoading: false,
       dataFrom: '',
       open: false,
     }
@@ -48,22 +47,13 @@ class MovieCard extends Component {
   wikiDetails = () => {
     const {movie} = this.props;
     const wikiSearchUrl = wikiQueryTitle + movie.title + wikiExp;
-    this.setState({
-      isLoading: true,
-    });
 
     axios.get(wikiSearchUrl)
       .then(res => {
         this.fetchWikiExtract(res);
-        this.setState({
-          isLoading: false,
-        });
       })
       .catch(err => {
         console.log(err.message);
-        this.setState({
-          isLoading: false,
-        });
       })
   };
 
@@ -117,7 +107,7 @@ class MovieCard extends Component {
   };
 
   render() {
-    const { movieInfo, isLoading, dataFrom, wikiPageId, open } = this.state;
+    const { movieInfo, dataFrom, wikiPageId, open } = this.state;
     const { classes, movie } = this.props;
     const release_year = (movie.release_date).slice(0, 4);
     const language = (ISO6391.getName(movie.original_language));
@@ -139,7 +129,6 @@ class MovieCard extends Component {
                     movieInfo={movieInfo}
                     movie={movie}
                     dataFrom={dataFrom}
-                    isLoading={isLoading}
                     wikiPageId={wikiPageId}
                     handleClose={this.handleClose}
                     open={open}
