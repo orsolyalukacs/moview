@@ -34,7 +34,10 @@ Your app is ready to be deployed!
 
 
 ## Components & how they work
-- App: Moview app logo is shown on initial state, before a Search method has been fired.
+- App:       Moview app logo is shown on initial state, before a Search method has been fired. 
+             One can search for movie titles, and once those are loaded, to related movies.
+             A spinner is shown while data is being fetched from the API.
+             If no movies found during search, displays an error message. 
 - ButtonPrimary: Wraps Button component from Material UI in custom theme provided in utils directory.
 - SearchBar: Input search field and logos. Search for entered string (a movie title) after pressing the Enter key. 
 - MovieCard: Shows movie poster image, title, release year, original language and rating.
