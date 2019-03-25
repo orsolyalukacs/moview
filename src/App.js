@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import config from './config';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import SearchAppBar from './components/SearchBar';
 import MovieGrid from './components/MovieGrid';
 import MovieCard from './components/MovieCard';
 
-const searchExp = '?api_key=2ab787a73e407248e50ffd9242bd638f&query=';
+const tmdbKey = config.TMDB_KEY;
+const searchExp = '?api_key=' + tmdbKey + '&query=';
 const baseUrl = 'https://api.themoviedb.org/3/';
 const posterBaseUrl = 'https://image.tmdb.org/t/p/w185';
 const placeholderImg = 'https://www.freeiconspng.com/uploads/no-image-icon-23.jpg';
-const searchMovieTerm = 'search/movie?api_key=2ab787a73e407248e50ffd9242bd638f&query=';
-const similarMovie = '/similar?api_key=2ab787a73e407248e50ffd9242bd638f';
+const searchMovieTerm = 'search/movie?api_key=' + tmdbKey + '&query=';
+const similarMovie = '/similar?api_key=' + tmdbKey;
 
 class App extends Component {
   constructor(props) {
