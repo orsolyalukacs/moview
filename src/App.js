@@ -8,6 +8,10 @@ import MovieCard from './components/MovieCard'
 
 const searchExp = "?api_key=2ab787a73e407248e50ffd9242bd638f&query=";
 const baseUrl = "https://api.themoviedb.org/3/";
+const posterBaseUrl = "https://image.tmdb.org/t/p/w185";
+const placeholderImg = "https://www.freeiconspng.com/uploads/no-image-icon-23.jpg";
+const searchMovieTerm = "search/movie?api_key=2ab787a73e407248e50ffd9242bd638f&query=";
+const similarMovie = "/similar?api_key=2ab787a73e407248e50ffd9242bd638f";
 
 class App extends Component {
   constructor(props) {
@@ -39,8 +43,6 @@ class App extends Component {
   }
 
   renderResults(results) {
-    const posterBaseUrl = "https://image.tmdb.org/t/p/w185";
-    const placeholderImg = "https://www.freeiconspng.com/uploads/no-image-icon-23.jpg";
     let movieList = [];
 
     results.forEach((movie) => {
@@ -68,18 +70,16 @@ class App extends Component {
 
   searchMovie = (searchTerm, searchExp, searchType) => {
     let url;
-    if (this._isMounted) {
-      this.setState({
-        initialState: false,
-        isLoading: true
-      });
-    }
+    this.setState({
+      initialState: false,
+      isLoading: true
+    });
 
     if (searchType === 'related') {
-      url =  baseUrl + "movie/" + searchTerm + "/similar?api_key=2ab787a73e407248e50ffd9242bd638f";
+      url =  baseUrl + "movie/" + searchTerm + similarMovie;
     }
     else if(searchType === 'movie') {
-      url = baseUrl + "search/movie?api_key=2ab787a73e407248e50ffd9242bd638f&query=" + searchTerm;
+      url = baseUrl + searchMovieTerm + searchTerm;
     } else {
       return null;
     }
