@@ -1,4 +1,4 @@
-import {fade} from '@material-ui/core/styles/colorManipulator';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   root: {
@@ -92,7 +92,7 @@ const styles = theme => ({
   error: {
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-  }
+  },
 });
 
 export default styles;
