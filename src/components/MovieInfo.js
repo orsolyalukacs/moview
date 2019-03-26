@@ -51,9 +51,13 @@ class MovieInfo extends Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions className={classes.dialog}>
-            { showWikiLink ?
-            <ButtonPrimary label="Wikipedia" onClickHandler={this.openWikiPage} value="Wikipedia" />
-              : null }
+            {showWikiLink ? (
+              <ButtonPrimary
+                label="Wikipedia"
+                onClickHandler={this.openWikiPage}
+                value="Wikipedia"
+              />
+            ) : null}
             <ButtonPrimary
               color="secondary"
               label="TMDb"
