@@ -1,6 +1,7 @@
 # Moview
 
 __Moview is a movie searching app with React.__
+[view demo](http://moview-lucky-pear.surge.sh/)
 
 ## Features
 - Look up movies by their title. 
