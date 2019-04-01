@@ -40,7 +40,7 @@ Your app is ready to be deployed!
              A spinner is shown while data is being fetched from the API.
              If no movies found during search, displays an error message. 
 - ButtonPrimary: Wraps Button component from Material UI in custom theme provided in utils directory.
-- SearchBar: Input search field and logos. Search for entered string (a movie title) after pressing the Enter key. 
+- SearchBar: Input search field and logos. Search for a string (a movie title) after pressing the Enter key. 
 - MovieCard: Shows movie poster image, title, release year, original language and rating.
              Shows a placeholder image if no poster image found.
              All data fetched from TMdb API in the component.
@@ -53,6 +53,9 @@ Your app is ready to be deployed!
              If no information found, gives an error message.
 
 ### Improvements to be made:
+- Implement better search for Wikipedia: first run an open search and then query for the title.
+- Outsource search expression strings to a config file and import to make the MovieCard component reusable.
+- Add a search button to the SearchBar, so a user can search by clicking on it, not only using the enter key.
 - Use Router and history to be able to go back after clicking _'Related'_.
 - Write tests with Jest and enzyme.
-- Filter Wikipedia Api calls by only showing the movie searched for, and not redirect pages.
+
