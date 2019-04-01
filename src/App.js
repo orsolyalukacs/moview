@@ -23,6 +23,7 @@ class App extends Component {
       requestFailed: false,
       isLoading: false,
       initialState: true,
+      row: [],
     };
     this.keyPress = this.keyPress.bind(this);
     this.searchMovie = this.searchMovie.bind(this);
@@ -88,6 +89,8 @@ class App extends Component {
       }
     }
   }
+
+  //TODO: add button for search
 
   renderResults(results) {
     const movieList = [];
