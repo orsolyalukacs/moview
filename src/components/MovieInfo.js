@@ -77,9 +77,12 @@ class MovieInfo extends Component {
 MovieInfo.propTypes = {
   classes: PropTypes.object.isRequired,
   movie: PropTypes.object.isRequired,
+  movieInfo: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   dataFrom: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
+  showWikiLink: PropTypes.bool.isRequired,
+  wikiPageId: PropTypes.node.isRequired,
 };
 
 export default withStyles(styles)(MovieInfo);
