@@ -6,7 +6,6 @@
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
-    "fetch": "^1.1.0",
     "iso-639-1": "^2.0.3",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
