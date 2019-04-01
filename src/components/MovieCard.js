@@ -32,13 +32,14 @@ const wikiListExp = '&origin=*&utf8=&explaintext&format=json';
 const relatedTerm = `/similar?api_key=${tmdbKey}`;
 const wikiSearch =
   'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=xml&exintro=&titles=';
+// TODO: outsource these strings to a config file and import, it makes this component reusable.
 
 class MovieCard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      movieInfo: [],
+      movieInfo: '',
       wikiPageId: '',
       dataFrom: '',
       open: false,
