@@ -15,25 +15,6 @@ __Moview is a movie searching app created with React.__
 
 ![](/src/assets/moview_screen.gif)
 
-## Setup
-
-To run this project, install it locally from the project directory, using npm:
-
-### `npm install`
-
-When installing packages has finished, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-Your app is ready to be deployed!
-
-
 ## Components & how they work
 - App:       Moview app logo is shown on initial state, before a Search method has been fired. 
              One can search for movie titles, and once those are loaded, to related movies.
